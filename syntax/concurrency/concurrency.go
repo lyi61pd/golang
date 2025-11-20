@@ -29,6 +29,6 @@ func main() {
 	}()
 
 	// 从 channel 接收数据（会阻塞直到有数据到来）
-	value := <-ch
+	value := <- ch
 	fmt.Println("从channel收到：", value)
 }
