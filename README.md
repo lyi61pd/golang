@@ -37,6 +37,7 @@
 
 | 文件夹 | 说明 | 技术栈 |
 |--------|------|--------|
+| `go-context/` | Context 上下文详解（取消、超时、传值） | 标准库 context |
 | `gin-demo/` | Gin Web 框架实战项目，包含完整的项目结构 | Gin + GORM + SQLite |
 | `gorm-demo/` | GORM ORM 框架学习示例 | GORM |
 | `gin-swagger/` | Gin + Swagger API 文档示例 | Gin + Swagger |
@@ -73,16 +74,17 @@ gin-demo/
 ### 🚀 中级阶段（并发与进阶特性）
 
 6. **并发编程**：`syntax/concurrency/`、`syntax/sync/`
-7. **包管理**：`syntax/mathutil/`、`syntax/usemath/`
-8. **测试**：`syntax/testing/`
-9. **进阶特性**：`syntax/generic/`、`syntax/reflection/`
+7. **Context 上下文控制**：`packages/go-context/`
+8. **包管理**：`syntax/mathutil/`、`syntax/usemath/`
+9. **测试**：`syntax/testing/`
+10. **进阶特性**：`syntax/generic/`、`syntax/reflection/`
 
 ### 💪 高级阶段（实战项目）
 
-10. **错误处理**：`syntax/error/`、`syntax/deferpanic/`
-11. **Web 开发**：`packages/gin-demo/`
-12. **数据库**：`packages/gorm-demo/`
-13. **第三方集成**：`packages/ali-kms/`、`packages/expr-lang/`
+11. **错误处理**：`syntax/error/`、`syntax/deferpanic/`
+12. **Web 开发**：`packages/gin-demo/`
+13. **数据库**：`packages/gorm-demo/`
+14. **第三方集成**：`packages/ali-kms/`、`packages/expr-lang/`
 
 ## 快速开始
 
@@ -99,6 +101,16 @@ go run hello.go
 # 运行其他示例（以类型为例）
 cd ../types
 go run types.go
+```
+
+### 运行 Context 示例
+
+```bash
+# 进入 go-context 目录
+cd packages/go-context
+
+# 运行 Context 学习示例
+go run main.go
 ```
 
 ### 运行 Gin Web 项目
