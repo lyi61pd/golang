@@ -9,7 +9,21 @@ import (
 	"go.uber.org/fx"
 )
 
-// 2. 进阶示例：带生命周期管理的 HTTP 服务器
+// Logger 接口
+type Logger interface {
+	Log(message string)
+}
+
+// SimpleLogger 实现
+type SimpleLogger struct{}
+
+func NewSimpleLogger() Logger {
+	return &SimpleLogger{}
+}
+
+func (l *SimpleLogger) Log(message string) {
+	fmt.Printf("[LOG] %s\n", message)
+}
 
 // Config 配置结构
 type Config struct {
@@ -67,16 +81,18 @@ func NewHTTPServer(lc fx.Lifecycle, config *Config, handler *HTTPHandler, logger
 	// 注册生命周期钩子
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
-			logger.Log(fmt.Sprintf("启动 HTTP 服务器，监听端口 %s", config.Port))
+			logger.Log(fmt.Sprintf("🚀 启动 HTTP 服务器，监听端口 %s", config.Port))
+			logger.Log("   访问 http://localhost:8080")
+			logger.Log("   按 Ctrl+C 停止服务器")
 			go func() {
 				if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-					logger.Log(fmt.Sprintf("HTTP 服务器错误: %v", err))
+					logger.Log(fmt.Sprintf("❌ HTTP 服务器错误: %v", err))
 				}
 			}()
 			return nil
 		},
 		OnStop: func(ctx context.Context) error {
-			logger.Log("关闭 HTTP 服务器")
+			logger.Log("⏹️  关闭 HTTP 服务器")
 			return srv.Shutdown(ctx)
 		},
 	})
@@ -84,13 +100,6 @@ func NewHTTPServer(lc fx.Lifecycle, config *Config, handler *HTTPHandler, logger
 	return httpServer
 }
 
-// 要运行此示例：
-// 1. 创建新目录：mkdir -p ../fxx-http && cd ../fxx-http
-// 2. 复制文件：cp ../fxx/go.mod . && cp ../fxx/main.go logger.go && cp ../fxx/02_http_server.go main.go
-// 3. 取消注释下面的 main 函数
-// 4. go run .
-
-/*
 func main() {
 	fmt.Println("=== fx HTTP 服务器示例 ===\n")
 
@@ -109,4 +118,3 @@ func main() {
 	app.Run()
 	// 服务器会一直运行，直到收到停止信号（Ctrl+C）
 }
-*/
