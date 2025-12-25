@@ -81,7 +81,7 @@ func main() {
 
 	fmt.Println("\n💡 学习要点：")
 	fmt.Println("  • fx.Provide() 注册构造函数")
-	fmt.Println("  • fx 自动解析依赖：Logger → Greeter → Application")
+	fmt.Println("  • fx 自动解析依赖：Leogger → Greeter → Application")
 	fmt.Println("  • fx.Invoke() 执行业务逻辑")
 	fmt.Println("  • shutdowner.Shutdown() 让程序自动退出")
 }

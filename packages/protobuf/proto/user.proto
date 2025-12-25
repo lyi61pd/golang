@@ -1,0 +1,49 @@
+// proto3 语法版本
+syntax = "proto3";
+
+// 定义包名，生成的 Go 代码会使用这个包名
+package user;
+
+// 指定生成的 Go 代码的包路径
+option go_package = "./proto";
+
+// 定义用户消息结构
+message User {
+    int64 id = 1;           // 用户ID
+    string name = 2;        // 用户名
+    string email = 3;       // 邮箱
+    int32 age = 4;          // 年龄
+    repeated string tags = 5; // 标签列表 (repeated 表示数组)
+    Address address = 6;    // 嵌套消息
+    Gender gender = 7;      // 枚举类型
+}
+
+// 定义地址消息（嵌套消息示例）
+message Address {
+    string city = 1;
+    string street = 2;
+    string zip_code = 3;
+}
+
+// 定义性别枚举
+enum Gender {
+    UNKNOWN = 0;  // 枚举第一个值必须是0
+    MALE = 1;
+    FEMALE = 2;
+}
+
+// 定义用户列表
+message UserList {
+    repeated User users = 1;
+}
+
+// 定义请求和响应消息（模拟 RPC 场景）
+message GetUserRequest {
+    int64 user_id = 1;
+}
+
+message GetUserResponse {
+    User user = 1;
+    string message = 2;
+}
+
